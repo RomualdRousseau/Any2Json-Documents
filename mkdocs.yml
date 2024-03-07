@@ -1,0 +1,5 @@
+site_name: Any2Json Documents
+nav:
+  - Home: index.md
+  - Article 1: article_1.md
+  - White Papers: white_papers.md
