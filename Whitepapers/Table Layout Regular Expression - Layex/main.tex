@@ -1,7 +1,6 @@
 \documentclass{article}
 \usepackage[table, xcdraw]{xcolor}
 \usepackage{graphicx}
-\usepackage{svg}
 \usepackage{float}
 \usepackage{multirow}
 \usepackage{longtable}
@@ -49,7 +48,7 @@ inherent complexities associated with table processing, ultimately enhancing dat
 decision-making and analysis. The following figure shows few examples of table layouts:
 \begin{figure}[H]
 \caption{Various table layouts}
-\includesvg[width=\columnwidth]{various_tables.drawio}
+\includegraphics[width=\columnwidth]{various_tables.drawio}
 \end{figure}
 
 \section{About other research}
@@ -58,6 +57,20 @@ approaches give very good result, they often failed in the consistence of the re
 deterministic, therefore the data extraction is very consistent and predictable. To be noted, that our approach can be
 used jointly with machine learning, and our compact way to describe table layout can be used to quickly create training
 sets and/or labels.
+
+\section{Data Used and Statistics}
+The following table shows the number of documents used to experiement and the number od documents that this system since
+helped to ingest:
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Languages & Experiment Docs & Prod Docs  & Prod Records    \\
+\hline
+8         & 445             & 4,777      & 27,698,600 \\
+\hline
+\end{tabular}
+\end{table}
 
 \section{Anatomy of a table}
 By analyzing different layouts based on hundred of documents, a table can be categorized in different basic components:
@@ -71,7 +84,7 @@ components of a table follows the direction of reading, left top right, top to b
 following figure shows a graphical overview of those components and their relation to each others:
 \begin{figure}[H]
 \caption{Ananomy of a table}
-\includesvg[width=\columnwidth]{table_anatomy.drawio}
+\includegraphics[width=\columnwidth]{table_anatomy.drawio}
 \end{figure}
 
 \subsection{More formally}
@@ -87,7 +100,7 @@ represented as a stream of cells, where:
 \end{itemize}
 \begin{figure}[H]
 \caption{Stream over a Table}
-\includesvg[width=\columnwidth]{table_stream.drawio}
+\includegraphics[width=\columnwidth]{table_stream.drawio}
 \end{figure}
 
 \section{Formally}
@@ -318,8 +331,22 @@ reg.match(table_to_stream(ws.rows, R))
 Below the basic steps of the algorithm:
 \begin{figure}[H]
 \caption{Layex Algorithm}
-\includesvg[width=\columnwidth]{layex_algorithm.drawio}
+\includegraphics[width=\columnwidth]{layex_algorithm.drawio}
 \end{figure}
+
+\section{Results and Statistics}
+The following tables give some statitics and the number of layex we wrote to ingest all those documents. The ratio number
+of layex verses the quantity of docs parsed demonstrates the flexibility and robusteness of this approach.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Avg Records per Docs & Max Records per Docs  & Layex  \\
+\hline
+5,798                & 1,048,575             & 15     \\
+\hline
+\end{tabular}
+\end{table}
 
 \section{Few examples}
 Layex are a very efficient way to describe complex table layout and therefore detect them and extract the different
@@ -329,7 +356,7 @@ components and data from them. Below are few examples.
 The first example is a simple table with a header and few rows:
 \begin{figure}[H]
 \caption{Simple Table}
-\includesvg[width=\columnwidth]{simple_table.drawio}
+\includegraphics[width=\columnwidth]{simple_table.drawio}
 \end{figure}
 This simple table can be described with the layex:
 \[(.+\$)((.+\$)*)\]
@@ -351,7 +378,7 @@ Where,
 The first example is a complex table with a header, sub-header, sub-footer and footer:
 \begin{figure}[H]
 \caption{Complex Table}
-\includesvg[width=\columnwidth]{complex_table.drawio}
+\includegraphics[width=\columnwidth]{complex_table.drawio}
 \end{figure}
 This simple table can be described with the layex:
 \[(v\$)(v+\$)((v\$)(.+\$)*(v\$))*(.+\$)(v\$)\]

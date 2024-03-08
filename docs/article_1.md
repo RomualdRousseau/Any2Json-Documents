@@ -78,7 +78,7 @@ loads and parses the document through different steps to extract and structure t
 
 The basic steps are:
 
-![Framework Main Steps](images/framework-main-steps.drawio.png)
+![Framework Main Steps](images/framework_main_steps.drawio.png)
 
 ### Load by Chunks
 
@@ -139,7 +139,7 @@ We will present in a tagger based on word embedding and a neural network to clas
 
 All these steps are summarized in the graph below:
 
-![Detailed Algorithm](images/detailed-algorithm.png)
+![Detailed Algorithm](images/deepsea_algo.drawio.png)
 
 ## Conclusion
 
