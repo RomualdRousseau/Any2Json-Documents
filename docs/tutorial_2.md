@@ -1,18 +1,12 @@
-# Tutorial 3 - Data extraction with defects
+# Tutorial 2 - Data extraction with a complex semi-structured layout
 
 [View source on GitHub](https://github.com/RomualdRousseau/Any2Json-Examples).
 
-This tutoral is a continuation of the [Tutorial 2](tutorial_2.md).
-
 This tutorial will demonstrate how to use [Any2Json](https://github.com/RomualdRousseau/Any2Json) to extract data from
-one Excel spreadsheet with defects. To demonstrate the usage of this framework, we will load a document with a somewhat
-complex layout, as seen here:
+one Excel spreadsheet. To demonstrate the usage of this framework, we will load a document with a somewhat complex
+layout, as seen here:
 
-![document with multiple tables](images/tutorial3_data.png)
-
-Observe that there is hidden rows here and there. This kind of defect, mistakes or cosmetic artifacts, are very common
-and creates headaches when loading data. We will see that Any2Json automatically removes those artifacts (method called
-stiching) and determines if the data is part of a table or not.
+![document with multiple tables](images/tutorial2_data.png)
 
 ## Setup Any2Json
 
@@ -28,9 +22,9 @@ import com.github.romualdrousseau.any2json.Document;
 import com.github.romualdrousseau.any2json.DocumentFactory;
 import com.github.romualdrousseau.any2json.parser.LayexTableParser;
 
-public class Tutorial3 implements Runnable {
+public class Tutorial2 implements Runnable {
 
-    public Tutorial3() {
+    public Tutorial2() {
     }
 
     @Override
@@ -39,7 +33,7 @@ public class Tutorial3 implements Runnable {
     }
 
     public static void main(final String[] args) {
-        new Tutorial3().run();
+        new Tutorial2().run();
     }
 }
 ```
@@ -89,8 +83,8 @@ module to enable the intelligent layout parsing. The following depedencies are r
 To parse a document, any2Json needs a model that will contains the parameters required to the parsing. Instead to start
 from an empty Model (See [Tutorail 6](tutorial_6.md)), we will start from an existing one and we will adapt it for our document.
 
-The base model is "sales-english" that has been trained over 400+ english documents containing distributor data and with
-a large range of different layouts. In the GitHub, you can find several models for different languages to start with.
+The base model is "sales-english" that has been trained on 400+ english documents containing distributor data and with a
+large range of different layouts. In the GitHub, you can find several models for different languages to start with.
 
 The base model already recognize some entities such as DATE and NUMBER. We will setup the model to add one new entity
 PRODUCTNAME and we will configure a layex to extract the different elements of the documents. You can find more details
@@ -116,15 +110,15 @@ model.registerTableParser(tableParser);
 
 ### Load the document
 
-We load the document by creating a document instance with the model. The hint "Document.Hint.INTELLI_LAYOUT" will tell
-the document instance that the document has a complex layout. The recipe "sheet.setExtractionThreshold(0)" will tell the
-parser engine to extract the features as ***small*** as possible:
+We load the document by creating a document instance with the model and options to parse the document. The hint
+"Document.Hint.INTELLI_LAYOUT" will tell the document instance that the document has a complex layout. The recipe
+"sheet.setExtractionThreshold(0)" will tell the parser engine to extract the features as ***small*** as possible:
 
 ```java
-final var file = Common.loadData("document with defect.xlsx", this.getClass());
+final var file = Common.loadData("document with multiple tables.xlsx", this.getClass());
 try (final var doc = DocumentFactory.createInstance(file, "UTF-8")
         .setModel(model)
-        .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT, Document.Hint.INTELLI_TAG))
+        .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT))
         .setRecipe("sheet.setExtractionThreshold(0)")) {
     ...
 }
@@ -132,7 +126,7 @@ try (final var doc = DocumentFactory.createInstance(file, "UTF-8")
 
 ### Output the tabular result
 
-Finally, we iterate over the sheets, rows and cells and output the data on the console:
+Finally, we iterate over the sheets, rows and cells and outpout the data on the console:
 
 ```java
 doc.sheets().forEach(s -> Common.addSheetDebugger(s).getTable().ifPresent(t -> {
@@ -174,5 +168,4 @@ A document very               2023-02-01             Product 3ml                
 ```
 
 On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
-between the elements of the spreadsheet and how there are structured in tabular form. Observe also how the artifacts
-didn't change the result and we didn't even need to change the code.
+between the elements of the spreadsheet and how there are structured in tabular form.

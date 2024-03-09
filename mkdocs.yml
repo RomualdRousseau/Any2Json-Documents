@@ -1,7 +1,5 @@
 site_name: Any2Json Documents
 nav:
   - Home: index.md
-  - Tutorial 1 : tutorial_1.md
-  - Article: article.md
-  - Patents: patents.md
+  - How it works: how_it_works.md
   - White Papers: white_papers.md

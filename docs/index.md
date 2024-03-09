@@ -2,17 +2,16 @@
 
 ## Getting Started
 
-* [Tutorial 1 - Data extraction from an Excel spreadsheet with a simple layout](tutorial_1.md)
-* [Tutorial 2](tutorial_2.md)
-* [Tutorial 3 - Data extraction from an Excel spreadsheet with a complex semi-structured layout](tutorial_3.md)
-* [Tutorial 4](tutorial_4.md)
-* [Tutorial 5](tutorial_5.md)
-* [Tutorial 6](tutorial_6.md)
-* [Tutorial 7 - Make a classifier](tutorial_7.md)
+* [Tutorial 1 - Getting Started](tutorial_1.md)
+* [Tutorial 2 - Data extraction with a complex semi-structured layout](tutorial_2.md)
+* [Tutorial 3 - Data extraction with defects](tutorial_3.md)
+* [Tutorial 4 - Data extraction with tags](tutorial_4.md)
+* [Tutorial 5 - More complex noise reduction](tutorial_5.md)
+* [Tutorial 6 - Make a classifier](tutorial_6.md)
 
 ## How it works
 
-* [Article](article.md)
+* Please find detailed explanation [here](how_it_works.md)
 
 ## Resources
 

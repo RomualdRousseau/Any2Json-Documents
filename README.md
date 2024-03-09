@@ -6,12 +6,10 @@
   * [x] Article - Revolutionizing Data Management: The Transformative Potential of a Novel Framework for Semi-Structured Documents
 * Complete tutorials
   * [ ] Tutorial 1 - Data extraction from an Excel spreadsheet with a simple layout
-  * [ ] Tutorial 2 - Noise reduction
-  * [-] Tutorial 3 - Data extraction from an Excel spreadsheet with a complex semi-structured layout
-  * [ ] Tutorial 4 - Table Layout Parsing
-  * [ ] Tutorial 5 - Tabular Assembling
-  * [ ] Tutorial 6 - Tagging
-  * [ ] Tutorial 7 - Make a classifier
+  * [-] Tutorial 2 - Data extraction from an Excel spreadsheet with a complex semi-structured layout
+  * [ ] Tutorial 3 - Data extraction from an Excel spreadsheet with defect
+  * [ ] Tutorial 4 - Data extraction from an Excel spreadsheet with tagging
+  * [ ] Tutorial 5 - Make a classifier
 * Completes white papers
   * [x] Table Layout Regular Expression - Layex
   * [x] Semi-structured Document Feature Extraction
