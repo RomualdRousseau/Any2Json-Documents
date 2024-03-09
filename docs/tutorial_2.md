@@ -41,7 +41,7 @@ public class Tutorial2 implements Runnable {
 ### pom.xml
 
 Any2Json has a very modular design where each functionality can be loaded separatly. We add the "any2json-layex-parser"
-module to enable the intelligent layout parsing. The following depedencies are required to run the code above:
+module to enable the intelligent layout parsing. The following depedencies are required to run the code of this tutorial:
 
 ```xml
 <!-- ShuJu Framework -->
@@ -169,3 +169,9 @@ A document very               2023-02-01             Product 3ml                
 
 On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
 between the elements of the spreadsheet and how there are structured in tabular form.
+
+## Conclusion
+
+Congratulations! You have loaded documents using Any2Json.
+
+For more examples of using Any2Json, check out the [tutorials](index.md).

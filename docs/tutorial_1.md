@@ -11,7 +11,7 @@ The expected layout of each document is a single header row followed by rows of 
 
 ![document with simple table](images/tutorial1_data.png)
 
-## Minimal code
+## Setup Any2Json and Minimal code
 
 The minimal code to load a document is as follow:
 
@@ -23,6 +23,41 @@ try (final var doc = DocumentFactory.createInstance(file, "UTF-8")) {
         doSomethingWithRows(t.rows());
     }));
 }
+```
+
+## pom.xml
+
+Any2Json has a very modular design. Each module has to be loaded explicitely. The following modules are
+required to run the code of this tutorial:
+
+```xml
+<!-- ShuJu Framework -->
+<dependency>
+    <groupId>com.github.romualdrousseau</groupId>
+    <artifactId>shuju</artifactId>
+    <version>${shuju.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.github.romualdrousseau</groupId>
+    <artifactId>shuju-jackson</artifactId>
+    <version>${shuju.version}</version>
+</dependency>
+<!-- Any2Json Framework -->
+<dependency>
+    <groupId>com.github.romualdrousseau</groupId>
+    <artifactId>any2json</artifactId>
+    <version>${any2json.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.github.romualdrousseau</groupId>
+    <artifactId>any2json-csv</artifactId>
+    <version>${any2json.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.github.romualdrousseau</groupId>
+    <artifactId>any2json-excel</artifactId>
+    <version>${any2json.version}</version>
+</dependency>
 ```
 
 The encoding ("UTF-8" here) is used if the encoding could not be detected when loading the document.
@@ -104,41 +139,6 @@ public class Tutorial1 implements Runnable {
       2023-02-01                     BBB                       1                     100
       2023-02-01                     BBB                       3                     300
       2023-02-01                     AAA                       1                     100
-```
-
-## pom.xml
-
-Any2Json has a very modular design. Each module has to be loaded explicitely. The following modules are
-required to run the code above:
-
-```xml
-<!-- ShuJu Framework -->
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>shuju</artifactId>
-    <version>${shuju.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>shuju-jackson</artifactId>
-    <version>${shuju.version}</version>
-</dependency>
-<!-- Any2Json Framework -->
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json-csv</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json-excel</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
 ```
 
 ## Conclusion
