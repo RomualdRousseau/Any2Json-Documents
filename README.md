@@ -40,7 +40,7 @@ For more details, see the [Installation Guide](https://github.com/casey/just).
 
 ### Build and run the documentation locally
 
-Run the examples:
+Run the following command line:
 
 ```bash
 just run
@@ -48,7 +48,7 @@ just run
 
 ### Build and deploy the documentation on GitHub
 
-Run the examples:
+Run the following command line:
 
 ```bash
 just deploy
