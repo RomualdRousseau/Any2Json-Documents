@@ -91,9 +91,9 @@ following depedencies are required to run the code of this tutorial:
 
 To parse a document, any2Json needs a model that will contains the parameters required to the parsing. Instead to start
 from an empty Model (See [Tutorail 7](tutorial_7.md)), we will start from an existing one and we will adapt it for our
-document. You can find a list an details of all models [here](https://github.com/RomualdRousseau/Any2Json-Models/).
+document. You can find a list and details of all models [here](https://github.com/RomualdRousseau/Any2Json-Models/).
 
-The base model, we will use, is "sales-english" that has been trained on 400+ english documents containing distributor
+The base model, we will use, is "sales-english" that has been trained on 200+ english documents containing distributor
 data and with a large range of different layouts.
 
 Because we use the tagging capabilities in this tutorial, here are a subset of tags recognized by the base model:
