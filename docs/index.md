@@ -16,6 +16,15 @@
 
 * Please find detailed explanations on how Any2json works and its unique features [here](how_it_works.md)
 
+## Plugins
+
+* [Any2Json Layex Parser](https://github.com/RomualdRousseau/Any2Json-Layex-Parser/)
+* [Any2Json Next Classifier](https://github.com/RomualdRousseau/Any2Json-Net-Classifier/)
+* [Any2Json Csv](https://github.com/RomualdRousseau/Any2Json-Csv/)
+* [Any2Json Excel](https://github.com/RomualdRousseau/Any2Json-Excel/)
+* [Any2Json Dbf](https://github.com/RomualdRousseau/Any2Json-Dbf/)
+* [Any2Json Parquet](https://github.com/RomualdRousseau/Any2Json-Parquet/)
+
 ## Resources
 
 * [White Papers](white_papers.md)
