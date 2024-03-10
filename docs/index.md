@@ -10,7 +10,7 @@
 * [Tutorial 4 - Data extraction with tags](tutorial_4.md)
 * [Tutorial 5 - Data extraction with pivot](tutorial_5.md)
 * [Tutorial 6 - More complex noise reduction](tutorial_6.md)
-* [Tutorial 7 - Make a classifier](tutorial_7.md)
+* [Tutorial 7 - Make a classifier from scratch](tutorial_7.md)
 
 ## How it works
 
@@ -24,6 +24,10 @@
 * [Any2Json Excel](https://github.com/RomualdRousseau/Any2Json-Excel/)
 * [Any2Json Dbf](https://github.com/RomualdRousseau/Any2Json-Dbf/)
 * [Any2Json Parquet](https://github.com/RomualdRousseau/Any2Json-Parquet/)
+
+## Models
+
+* [Models](https://github.com/RomualdRousseau/Any2Json-Models/)
 
 ## Resources
 

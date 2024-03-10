@@ -11,21 +11,37 @@ The expected layout of each document is a single header row followed by rows of 
 
 ![document with simple table](images/tutorial1_data.png)
 
-## Setup Any2Json and Minimal code
+## Setup Any2Json
 
-The minimal code to load a document is as follow:
+### Import the packages and setup the main class:
 
 ```java
-final var file = Common.loadData(f, this.getClass());
-try (final var doc = DocumentFactory.createInstance(file, "UTF-8")) {
-    doc.sheets().forEach(s -> s.getTable().ifPresent(t -> {
-        doSomethingWithHeaders(t.headers());
-        doSomethingWithRows(t.rows());
-    }));
+package com.github.romualdrousseau.any2json.examples;
+
+import java.util.EnumSet;
+import java.util.List;
+
+import com.github.romualdrousseau.any2json.Document;
+import com.github.romualdrousseau.any2json.DocumentFactory;
+import com.github.romualdrousseau.any2json.parser.LayexTableParser;
+
+public class Tutorial1 implements Runnable {
+
+    public Tutorial1() {
+    }
+
+    @Override
+    public void run() {
+        // Code will come here
+    }
+
+    public static void main(final String[] args) {
+        new Tutorial1().run();
+    }
 }
 ```
 
-## pom.xml
+### pom.xml
 
 Any2Json has a very modular design. Each module has to be loaded explicitely. The following modules are
 required to run the code of this tutorial:
@@ -58,6 +74,20 @@ required to run the code of this tutorial:
     <artifactId>any2json-excel</artifactId>
     <version>${any2json.version}</version>
 </dependency>
+```
+
+## Minimal code
+
+The minimal code to load a document is as follow:
+
+```java
+final var file = Common.loadData(f, this.getClass());
+try (final var doc = DocumentFactory.createInstance(file, "UTF-8")) {
+    doc.sheets().forEach(s -> s.getTable().ifPresent(t -> {
+        doSomethingWithHeaders(t.headers());
+        doSomethingWithRows(t.rows());
+    }));
+}
 ```
 
 The encoding ("UTF-8" here) is used if the encoding could not be detected when loading the document.

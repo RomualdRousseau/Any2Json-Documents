@@ -11,8 +11,6 @@ with a somewhat complex layout, as seen here:
 
 ![document with multiple tables](images/tutorial3_data.png)
 
-
-
 ## Setup Any2Json
 
 ### Import the packages and setup the main class:
@@ -92,10 +90,11 @@ following depedencies are required to run the code of this tutorial:
 ## Load base model
 
 To parse a document, any2Json needs a model that will contains the parameters required to the parsing. Instead to start
-from an empty Model (See [Tutorail 6](tutorial_6.md)), we will start from an existing one and we will adapt it for our document.
+from an empty Model (See [Tutorail 7](tutorial_7.md)), we will start from an existing one and we will adapt it for our
+document. You can find a list an details of all models [here](https://github.com/RomualdRousseau/Any2Json-Models/).
 
-The base model is "sales-english" that has been trained over 400+ english documents containing distributor data and with
-a large range of different layouts. In the GitHub, you can find several models for different languages to start with.
+The base model, we will use, is "sales-english" that has been trained on 400+ english documents containing distributor
+data and with a large range of different layouts.
 
 Because we use the tagging capabilities in this tutorial, here are a subset of tags recognized by the base model:
 
@@ -156,7 +155,7 @@ PRODUCTNAME and we will configure a layex to extract the different elements of t
 about layex [here](white_papers.md).
 
 ```java
-final var model = Common.loadModel("sales-english", this.getClass());
+final var model = Common.loadModelFromGitHub("sales-english");
 
 // Add product name entity to the model
 
