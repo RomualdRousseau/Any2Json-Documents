@@ -1,6 +1,6 @@
 # Revolutionizing Data Management: The Transformative Potential of a Novel Framework for Semi-Structured Documents
 
-This document describes a framework used without our company to manipulate semi-structured documents.
+This document describes how Any2Json framework helps to manipulate semi-structured documents.
 
 In today's data-driven landscape, navigating the complexities of semi-structured documents poses a significant challenge
 for organizations. These documents, characterized by diverse formats and a lack of standardization, often require
