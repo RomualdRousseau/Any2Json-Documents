@@ -67,11 +67,11 @@
             
             <li class="nav-item" data-level="1"><a href="#tutorial-1-getting-started" class="nav-link">Tutorial 1 - Getting Started</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#setup-any2json-and-minimal-code" class="nav-link">Setup Any2Json and Minimal code</a>
+            <li class="nav-item" data-level="2"><a href="#setup-any2json" class="nav-link">Setup Any2Json</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#pomxml" class="nav-link">pom.xml</a>
+            <li class="nav-item" data-level="2"><a href="#minimal-code" class="nav-link">Minimal code</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -99,17 +99,33 @@
 </ol>
 <p>The expected layout of each document is a single header row followed by rows of cells:</p>
 <p><img alt="document with simple table" src="../images/tutorial1_data.png" /></p>
-<h2 id="setup-any2json-and-minimal-code">Setup Any2Json and Minimal code</h2>
-<p>The minimal code to load a document is as follow:</p>
-<pre><code class="language-java">final var file = Common.loadData(f, this.getClass());
-try (final var doc = DocumentFactory.createInstance(file, &quot;UTF-8&quot;)) {
-    doc.sheets().forEach(s -&gt; s.getTable().ifPresent(t -&gt; {
-        doSomethingWithHeaders(t.headers());
-        doSomethingWithRows(t.rows());
-    }));
+<h2 id="setup-any2json">Setup Any2Json</h2>
+<h3 id="import-the-packages-and-setup-the-main-class">Import the packages and setup the main class:</h3>
+<pre><code class="language-java">package com.github.romualdrousseau.any2json.examples;
+
+import java.util.EnumSet;
+import java.util.List;
+
+import com.github.romualdrousseau.any2json.Document;
+import com.github.romualdrousseau.any2json.DocumentFactory;
+import com.github.romualdrousseau.any2json.parser.LayexTableParser;
+
+public class Tutorial1 implements Runnable {
+
+    public Tutorial1() {
+    }
+
+    @Override
+    public void run() {
+        // Code will come here
+    }
+
+    public static void main(final String[] args) {
+        new Tutorial1().run();
+    }
 }
 </code></pre>
-<h2 id="pomxml">pom.xml</h2>
+<h3 id="pomxml">pom.xml</h3>
 <p>Any2Json has a very modular design. Each module has to be loaded explicitely. The following modules are
 required to run the code of this tutorial:</p>
 <pre><code class="language-xml">&lt;!-- ShuJu Framework --&gt;
@@ -139,6 +155,16 @@ required to run the code of this tutorial:</p>
     &lt;artifactId&gt;any2json-excel&lt;/artifactId&gt;
     &lt;version&gt;${any2json.version}&lt;/version&gt;
 &lt;/dependency&gt;
+</code></pre>
+<h2 id="minimal-code">Minimal code</h2>
+<p>The minimal code to load a document is as follow:</p>
+<pre><code class="language-java">final var file = Common.loadData(f, this.getClass());
+try (final var doc = DocumentFactory.createInstance(file, &quot;UTF-8&quot;)) {
+    doc.sheets().forEach(s -&gt; s.getTable().ifPresent(t -&gt; {
+        doSomethingWithHeaders(t.headers());
+        doSomethingWithRows(t.rows());
+    }));
+}
 </code></pre>
 <p>The encoding ("UTF-8" here) is used if the encoding could not be detected when loading the document.</p>
 <h3 id="iterate-overs-the-headers">Iterate overs the headers:</h3>
