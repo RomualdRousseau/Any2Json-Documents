@@ -199,7 +199,7 @@ doc.sheets().forEach(s -> Common.addSheetDebugger(s).getTable().ifPresent(t -> {
 }));
 ```
 
-Note that noew we are printing the tags of the headers and not their names.
+Note that now we are printing the tags of the headers and not their names.
 
 ```bash
 2024-03-09 23:54:59 INFO  Common:37 - Loaded resource: /models/sales-english.json

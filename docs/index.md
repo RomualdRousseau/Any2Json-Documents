@@ -32,4 +32,3 @@
 ## Resources
 
 * [White Papers](white_papers.md)
-* [Patents](patents.md)
