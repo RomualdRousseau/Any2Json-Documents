@@ -198,7 +198,8 @@ try (final var doc = DocumentFactory.createInstance(file, &quot;UTF-8&quot;)
         .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT, Document.Hint.INTELLI_TAG))
         .setRecipe(
                 &quot;sheet.setCapillarityThreshold(0)&quot;,
-                &quot;sheet.setPivotOption(\&quot;WITH_TYPE_AND_VALUE\&quot;)&quot;)) {
+                &quot;sheet.setPivotOption(\&quot;WITH_TYPE_AND_VALUE\&quot;)&quot;,
+                &quot;sheet.setPivotTypeFormat(\&quot;%s\&quot;)&quot;)) {
     ...
 }
 </code></pre>
@@ -259,7 +260,8 @@ A document very              2023-Mar-02             Product 2ml                
 A document very              2023-Mar-02             Product 2ml                     AAA             2023-Mar-02                     100                       1
 </code></pre>
 <p>On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
-between the elements of the spreadsheet and how there are structured in tabular form.</p>
+between the elements of the spreadsheet and how there are structured in tabular form. Observe how the date columns has
+been unpivoted.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Congratulations! You have loaded documents using Any2Json.</p>
 <p>For more examples of using Any2Json, check out the <a href="../">tutorials</a>.</p></div>
