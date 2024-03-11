@@ -233,8 +233,8 @@ model.update();
 // Add a layex to the model
 
 final var tableParser = new LayexTableParser(
-        List.of(&quot;v$&quot;),
-        List.of(&quot;(()(v+$))(()(S{3,}$)())+(S{2}$)&quot;));
+        List.of(&quot;(v.$)+&quot;),
+        List.of(&quot;(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)&quot;));
 model.registerTableParser(tableParser);
 </code></pre>
 <h3 id="load-the-document">Load the document</h3>
@@ -246,7 +246,7 @@ the features as <strong><em>small</em></strong> as possible:</p>
 try (final var doc = DocumentFactory.createInstance(file, &quot;UTF-8&quot;)
         .setModel(model)
         .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT, Document.Hint.INTELLI_TAG))
-        .setRecipe(&quot;sheet.setExtractionThreshold(0)&quot;)) {
+        .setRecipe(&quot;sheet.setCapillarityThreshold(0)&quot;)) {
     ...
 }
 </code></pre>
