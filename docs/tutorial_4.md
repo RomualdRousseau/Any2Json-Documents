@@ -175,7 +175,7 @@ model.registerTableParser(tableParser);
 
 We load the document by creating a document instance with the model. The hint "Document.Hint.INTELLI_LAYOUT" tell
 the document instance that the document has a complex layout. We also add the hint "Document.Hint.INTELLI_TAG" to tell
-that the tabular result must be tagged. The recipe "sheet.setExtractionThreshold(0)" tell the parser engine to extract
+that the tabular result must be tagged. The recipe "sheet.setCapillarityThreshold(0)" tell the parser engine to extract
 the features as ***small*** as possible:
 
 ```java

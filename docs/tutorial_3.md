@@ -118,7 +118,7 @@ model.registerTableParser(tableParser);
 ### Load the document
 
 We load the document by creating a document instance with the model. The hint "Document.Hint.INTELLI_LAYOUT" will tell
-the document instance that the document has a complex layout. The recipe "sheet.setExtractionThreshold(0)" will tell the
+the document instance that the document has a complex layout. The recipe "sheet.setCapillarityThreshold(0)" will tell the
 parser engine to extract the features as ***small*** as possible:
 
 ```java
