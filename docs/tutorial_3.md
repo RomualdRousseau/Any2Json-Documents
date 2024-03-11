@@ -110,8 +110,8 @@ model.update();
 // Add a layex to the model
 
 final var tableParser = new LayexTableParser(
-        List.of("v$"),
-        List.of("(()(v+$))(()(S{3,}$)())+(S{2}$)"));
+        List.of("(v.$)+"),
+        List.of("(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"));
 model.registerTableParser(tableParser);
 ```
 

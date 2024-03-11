@@ -166,8 +166,8 @@ model.update();
 // Add a layex to the model
 
 final var tableParser = new LayexTableParser(
-        List.of("v$"),
-        List.of("(()(v+$))(()(S{3,}$)())+(S{2}$)"));
+        List.of("(v.$)+"),
+        List.of("(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"));
 model.registerTableParser(tableParser);
 ```
 
@@ -183,7 +183,7 @@ final var file = Common.loadData("document with defect.xlsx", this.getClass());
 try (final var doc = DocumentFactory.createInstance(file, "UTF-8")
         .setModel(model)
         .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT, Document.Hint.INTELLI_TAG))
-        .setRecipe("sheet.setExtractionThreshold(0)")) {
+        .setRecipe("sheet.setCapillarityThreshold(0)")) {
     ...
 }
 ```

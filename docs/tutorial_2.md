@@ -104,8 +104,8 @@ model.update();
 // Add a layex to the model
 
 final var tableParser = new LayexTableParser(
-        List.of("v$"),
-        List.of("(()(v+$))(()(S{3,}$)())+(S{2}$)"));
+        List.of("(v.$)+"),
+        List.of("(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"));
 model.registerTableParser(tableParser);
 ```
 
@@ -113,14 +113,14 @@ model.registerTableParser(tableParser);
 
 We load the document by creating a document instance with the model and options to parse the document. The hint
 "Document.Hint.INTELLI_LAYOUT" will tell the document instance that the document has a complex layout. The recipe
-"sheet.setExtractionThreshold(0)" will tell the parser engine to extract the features as ***small*** as possible:
+"sheet.setCapillarityThreshold(0)" will tell the parser engine to extract the features as ***small*** as possible:
 
 ```java
 final var file = Common.loadData("document with multiple tables.xlsx", this.getClass());
 try (final var doc = DocumentFactory.createInstance(file, "UTF-8")
         .setModel(model)
         .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT))
-        .setRecipe("sheet.setExtractionThreshold(0)")) {
+        .setRecipe("sheet.setCapillarityThreshold(0)")) {
     ...
 }
 ```

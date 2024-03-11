@@ -1,4 +1,4 @@
-# Tutorial 4 - Data extraction with defects
+# Tutorial 5 - Data extraction with pivot
 
 [View source on GitHub](https://github.com/RomualdRousseau/Any2Json-Examples).
 
@@ -112,8 +112,8 @@ model.update();
 // Add a layex to the model
 
 final var tableParser = new LayexTableParser(
-        List.of("v$"),
-        List.of("(()(.+$.+$))(()(E.+$)())+(e.+$)"));
+        List.of("(v.$)+"),
+        List.of("(()(S+$S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"));
 model.registerTableParser(tableParser);
 ```
 
@@ -132,7 +132,8 @@ try (final var doc = DocumentFactory.createInstance(file, "UTF-8")
         .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT, Document.Hint.INTELLI_TAG))
         .setRecipe(
                 "sheet.setCapillarityThreshold(0)",
-                "sheet.setPivotOption(\"WITH_TYPE_AND_VALUE\")")) {
+                "sheet.setPivotOption(\"WITH_TYPE_AND_VALUE\")",
+                "sheet.setPivotTypeFormat(\"%s\")")) {
     ...
 }
 ```
@@ -200,7 +201,8 @@ A document very              2023-Mar-02             Product 2ml                
 ```
 
 On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
-between the elements of the spreadsheet and how there are structured in tabular form.
+between the elements of the spreadsheet and how there are structured in tabular form. Observe how the date columns has
+been unpivoted.
 
 ## Conclusion
 
