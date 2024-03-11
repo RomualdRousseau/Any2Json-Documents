@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Tutorial 5 - Data extraction with pivot - Any2Json Documents</title>
+        <title>Tutorial 4 - Data extraction with defects - Any2Json Documents</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -65,8 +65,16 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#tutorial-5-data-extraction-with-pivot" class="nav-link">Tutorial 5 - Data extraction with pivot</a>
+            <li class="nav-item" data-level="1"><a href="#tutorial-4-data-extraction-with-defects" class="nav-link">Tutorial 4 - Data extraction with defects</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#setup-any2json" class="nav-link">Setup Any2Json</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#load-base-model" class="nav-link">Load base model</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
               <ul class="nav flex-column">
               </ul>
@@ -78,9 +86,155 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="tutorial-5-data-extraction-with-pivot">Tutorial 5 - Data extraction with pivot</h1>
+<h1 id="tutorial-4-data-extraction-with-defects">Tutorial 4 - Data extraction with defects</h1>
 <p><a href="https://github.com/RomualdRousseau/Any2Json-Examples">View source on GitHub</a>.</p>
-<p>This tutoral is a continuation of the <a href="../tutorial_4/">Tutorial 4</a>.</p>
+<p>This tutoral is a continuation of the <a href="../tutorial_4/">Tutorial 43</a>.</p>
+<p>This tutorial will demonstrate how to use <a href="https://github.com/RomualdRousseau/Any2Json">Any2Json</a> to extract data from
+one Excel spreadsheet with pivot. To demonstrate the usage of this framework, we will load a document
+with a somewhat complex layout, as seen here:</p>
+<p><img alt="document with multiple tables" src="images/tutorial4_data.png" /></p>
+<h2 id="setup-any2json">Setup Any2Json</h2>
+<h3 id="import-the-packages-and-setup-the-main-class">Import the packages and setup the main class:</h3>
+<pre><code class="language-java">package com.github.romualdrousseau.any2json.examples;
+
+import java.util.EnumSet;
+import java.util.List;
+
+import com.github.romualdrousseau.any2json.Document;
+import com.github.romualdrousseau.any2json.DocumentFactory;
+import com.github.romualdrousseau.any2json.parser.LayexTableParser;
+
+public class Tutorial5 implements Runnable {
+
+    public Tutorial5() {
+    }
+
+    @Override
+    public void run() {
+        // Code will come here
+    }
+
+    public static void main(final String[] args) {
+        new Tutorial5().run();
+    }
+}
+</code></pre>
+<h3 id="pomxml">pom.xml</h3>
+<p>Any2Json has a very modular design where each functionality can be loaded separatly. We add the "any2json-net-classifier"
+module to enable the tagging capabilities. This module use <a href="https://www.tensorflow.org/">TensorFlow</a> for Java. The
+following depedencies are required to run the code of this tutorial:</p>
+<pre><code class="language-xml">&lt;!-- ShuJu Framework --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;shuju&lt;/artifactId&gt;
+    &lt;version&gt;${shuju.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;shuju-jackson&lt;/artifactId&gt;
+    &lt;version&gt;${shuju.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- Any2Json Framework --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-layex-parser&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-net-classifier&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-csv&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-excel&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h2 id="load-base-model">Load base model</h2>
+<p>To parse a document, any2Json needs a model that will contains the parameters required to the parsing. Instead to start
+from an empty Model (See <a href="../tutorial_7/">Tutorial 7</a>), we will start from an existing one and we will adapt it for our
+document. You can find a list and details of all models <a href="https://github.com/RomualdRousseau/Any2Json-Models/">here</a>.</p>
+<p>The base model, we will use, is "sales-english" that has been trained on 200+ english documents containing distributor
+data and with a large range of different layouts.</p>
+<p>The base model already recognize some entities such as DATE and NUMBER. We will setup the model to add one new entity
+PRODUCTNAME and we will configure a layex to extract the different elements of the documents. You can find more details
+about layex <a href="../white_papers/">here</a>.</p>
+<pre><code class="language-java">final var model = Common.loadModelFromGitHub(&quot;sales-english&quot;);
+
+// Add product name entity to the model
+
+model.getEntityList().add(&quot;PRODUCTNAME&quot;);
+model.getPatternMap().put(&quot;\\D+\\dml&quot;, &quot;PRODUCTNAME&quot;);
+model.getPatternMap().put(&quot;(?i)((20|19)\\d{2}-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)-\\d{2})&quot;, &quot;DATE&quot;);
+model.update();
+
+// Add a layex to the model
+
+final var tableParser = new LayexTableParser(
+        List.of(&quot;v$&quot;),
+        List.of(&quot;(()(.+$.+$))(()(E.+$)())+(e.+$)&quot;));
+model.registerTableParser(tableParser);
+</code></pre>
+<h3 id="load-the-document">Load the document</h3>
+<p>We load the document by creating a document instance with the model. The hint "Document.Hint.INTELLI_LAYOUT" tell
+the document instance that the document has a complex layout. We also add the hint "Document.Hint.INTELLI_TAG" to tell
+that the tabular result must be tagged. The recipe "sheet.setCapillarityThreshold(0)" tell the parser engine to extract
+the features as <strong><em>small</em></strong> as possible. The recipe "sheet.setPivotOption(\"WITH_TYPE_AND_VALUE\")" tell to mange the
+pivot:</p>
+<pre><code class="language-java">final var file = Common.loadData(&quot;document with pivot.xlsx&quot;, this.getClass());
+try (final var doc = DocumentFactory.createInstance(file, &quot;UTF-8&quot;)
+        .setModel(model)
+        .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT))
+        .setRecipe(
+                &quot;sheet.setCapillarityThreshold(0)&quot;,
+                &quot;sheet.setPivotOption(\&quot;WITH_TYPE_AND_VALUE\&quot;)&quot;)) {
+
+    doc.sheets().forEach(s -&gt; Common.addSheetDebugger(s).getTable().ifPresent(t -&gt; {
+        Common.printHeaders(t.headers());
+        Common.printRows(t.rows());
+    }));
+}
+</code></pre>
+<p>Note that noew we are printing the tags of the headers and not their names.</p>
+<pre><code class="language-bash">2024-03-11 18:50:22 INFO  Common:42 - Loaded model: sales-english
+2024-03-11 18:50:22 INFO  Common:59 - Loaded resource: /data/document with pivot.xlsx
+2024-03-11 18:50:25 DEBUG Common:86 - Extracting features ...
+2024-03-11 18:50:25 DEBUG Common:90 - Generating Layout Graph ...
+2024-03-11 18:50:25 DEBUG Common:94 - Assembling Tabular Output ...
+============================== DUMP GRAPH ===============================
+Sheet1
+|- A document very important DATE META(1, 1, 7, 1, 1, 1)
+|- |- PRODUCTNAME META(1, 4, 1, 4, 1, 1)
+|- |- |- Client DATE #PIVOT? DATA(1, 5, 7, 11, 7, 4) (1)
+================================== END ==================================
+2024-03-11 18:50:25 DEBUG Common:99 - Done.
+A document very                     DATE             PRODUCTNAME                  Client            DATE #PIVOT?        DATE Amount #TYP         DATE Qty #TYPE?
+A document very              2023-Mar-02             Product 1ml                     AAA             2023-Jan-01                     100                       1
+A document very              2023-Mar-02             Product 1ml                     AAA             2023-Feb-01                     100                       1
+A document very              2023-Mar-02             Product 1ml                     AAA             2023-Mar-02                     100                       1
+A document very              2023-Mar-02             Product 1ml                     BBB             2023-Jan-01                     100                       1
+A document very              2023-Mar-02             Product 1ml                     BBB             2023-Feb-01                     100                       1
+A document very              2023-Mar-02             Product 1ml                     BBB             2023-Mar-02                     100                       1
+A document very              2023-Mar-02             Product 1ml                     BBB             2023-Jan-01                     300                       3
+A document very              2023-Mar-02             Product 1ml                     BBB             2023-Feb-01                     300                       3
+A document very              2023-Mar-02             Product 1ml                     BBB             2023-Mar-02                     300                       3
+A document very              2023-Mar-02             Product 1ml                     AAA             2023-Jan-01                     100                       1
+A document very              2023-Mar-02             Product 1ml                     AAA             2023-Feb-01                     100                       1
+A document very              2023-Mar-02             Product 1ml                     AAA             2023-Mar-02                     100                       1
+</code></pre>
+<p>On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
+between the elements of the spreadsheet and how there are structured in tabular form.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Congratulations! You have loaded documents using Any2Json.</p>
 <p>For more examples of using Any2Json, check out the <a href="../">tutorials</a>.</p></div>

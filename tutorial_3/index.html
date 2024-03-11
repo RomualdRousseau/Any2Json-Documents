@@ -184,7 +184,7 @@ model.registerTableParser(tableParser);
 </code></pre>
 <h3 id="load-the-document">Load the document</h3>
 <p>We load the document by creating a document instance with the model. The hint "Document.Hint.INTELLI_LAYOUT" will tell
-the document instance that the document has a complex layout. The recipe "sheet.setExtractionThreshold(0)" will tell the
+the document instance that the document has a complex layout. The recipe "sheet.setCapillarityThreshold(0)" will tell the
 parser engine to extract the features as <strong><em>small</em></strong> as possible:</p>
 <pre><code class="language-java">final var file = Common.loadData(&quot;document with defect.xlsx&quot;, this.getClass());
 try (final var doc = DocumentFactory.createInstance(file, &quot;UTF-8&quot;)

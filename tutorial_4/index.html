@@ -240,7 +240,7 @@ model.registerTableParser(tableParser);
 <h3 id="load-the-document">Load the document</h3>
 <p>We load the document by creating a document instance with the model. The hint "Document.Hint.INTELLI_LAYOUT" tell
 the document instance that the document has a complex layout. We also add the hint "Document.Hint.INTELLI_TAG" to tell
-that the tabular result must be tagged. The recipe "sheet.setExtractionThreshold(0)" tell the parser engine to extract
+that the tabular result must be tagged. The recipe "sheet.setCapillarityThreshold(0)" tell the parser engine to extract
 the features as <strong><em>small</em></strong> as possible:</p>
 <pre><code class="language-java">final var file = Common.loadData(&quot;document with defect.xlsx&quot;, this.getClass());
 try (final var doc = DocumentFactory.createInstance(file, &quot;UTF-8&quot;)
