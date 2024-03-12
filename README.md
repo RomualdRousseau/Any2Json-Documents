@@ -74,8 +74,8 @@ just deploy
   * [x] Tutorial 2 - Data extraction with a complex semi-structured layout
   * [x] Tutorial 3 - Data extraction with defects
   * [x] Tutorial 4 - Data extraction with tags
-  * [ ] Tutorial 5 - Data extraction with pivot
-  * [ ] Tutorial 6 - More complex noise reduction
+  * [x] Tutorial 5 - Data extraction with pivot
+  * [x] Tutorial 6 - More complex noise reduction
   * [ ] Tutorial 7 - Make a classifier
 * Completes white papers
   * [x] Table Layout Regular Expression - Layex
