@@ -4,6 +4,8 @@
 
 This tutoral is a continuation of the [Tutorial 6](tutorial_6.md).
 
+***Coming soon***
+
 ## Conclusion
 
 Congratulations! You have loaded documents using Any2Json.
