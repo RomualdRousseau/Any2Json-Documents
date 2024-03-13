@@ -25,6 +25,7 @@
 * [Any2Json Excel](https://github.com/RomualdRousseau/Any2Json-Excel/)
 * [Any2Json Dbf](https://github.com/RomualdRousseau/Any2Json-Dbf/)
 * [Any2Json Parquet](https://github.com/RomualdRousseau/Any2Json-Parquet/)
+* [Any2Json Pdf](https://github.com/RomualdRousseau/Any2Json-Pdf/)
 
 ## Models
 
