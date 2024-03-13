@@ -75,15 +75,19 @@ just deploy
   * [x] Tutorial 3 - Data extraction with defects
   * [x] Tutorial 4 - Data extraction with tags
   * [x] Tutorial 5 - Data extraction with pivot
-  * [x] Tutorial 6 - More complex noise reduction
-  * [ ] Tutorial 7 - Make a classifier
+  * [-] Tutorial 6 - More complex noise reduction
+  * [-] Tutorial 7 - Data extraction from PDF
+  * [ ] Tutorial 8 - Make a classifier
 * Completes white papers
   * [x] Table Layout Regular Expression - Layex
   * [x] Semi-structured Document Feature Extraction
   * [x] Stats in white paper Layex
+  * [ ] Add capillarity in thefeature extraction
+  * [ ] Amane merged cell in white paper Layex
 * Completes patents
   * [-] Patent 1 - Patent 1 - Method to Consistently and Efficiently Extract Table Layout Feature
   * [-] Patent 2 - Patent 2 - Method to Extract Semi-structured Document Features
 * Build and Deploy site
   * [x] Write justfile
   * [x] svg -> png
+  * [ ] Add pivot options in tutorial 5
