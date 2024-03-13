@@ -67,6 +67,14 @@
             
             <li class="nav-item" data-level="1"><a href="#tutorial-7-data-extraction-from-pdf" class="nav-link">Tutorial 7 - Data extraction from PDF</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#setup-any2json" class="nav-link">Setup Any2Json</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#load-base-model" class="nav-link">Load base model</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
               <ul class="nav flex-column">
               </ul>
@@ -81,7 +89,123 @@
 <h1 id="tutorial-7-data-extraction-from-pdf">Tutorial 7 - Data extraction from PDF</h1>
 <p><a href="https://github.com/RomualdRousseau/Any2Json-Examples">View source on GitHub</a>.</p>
 <p>This tutoral is a continuation of the <a href="../tutorial_6/">Tutorial 6</a>.</p>
-<p><strong><em>Coming soon</em></strong></p>
+<p>This tutorial will demonstrate how to use <a href="https://github.com/RomualdRousseau/Any2Json">Any2Json</a> to extract data from
+one PDF. The document is not well-formed and very noisy. To demonstrate the usage of this framework, we
+will load a document with a somewhat complex layout, as seen here:</p>
+<p><img alt="document with noises" src="images/tutorial7_data.png" /></p>
+<h2 id="setup-any2json">Setup Any2Json</h2>
+<h3 id="import-the-packages-and-setup-the-main-class">Import the packages and setup the main class:</h3>
+<pre><code class="language-java">package com.github.romualdrousseau.any2json.examples;
+
+import java.util.EnumSet;
+import java.util.List;
+
+import com.github.romualdrousseau.any2json.Document;
+import com.github.romualdrousseau.any2json.DocumentFactory;
+import com.github.romualdrousseau.any2json.parser.LayexTableParser;
+
+public class Tutorial7 implements Runnable {
+
+    public Tutorial7() {
+    }
+
+    @Override
+    public void run() {
+        // Code will come here
+    }
+
+    public static void main(final String[] args) {
+        new Tutorial7().run();
+    }
+}
+</code></pre>
+<h3 id="pomxml">pom.xml</h3>
+<p>Any2Json has a very modular design where each functionality can be loaded separatly. We add the "any2json-net-classifier"
+module to enable the tagging capabilities. This module use <a href="https://www.tensorflow.org/">TensorFlow</a> for Java. The
+following depedencies are required to run the code of this tutorial:</p>
+<pre><code class="language-xml">&lt;!-- ShuJu Framework --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;shuju&lt;/artifactId&gt;
+    &lt;version&gt;${shuju.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;shuju-jackson&lt;/artifactId&gt;
+    &lt;version&gt;${shuju.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- Any2Json Framework --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-layex-parser&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-net-classifier&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-csv&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-excel&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.romualdrousseau&lt;/groupId&gt;
+    &lt;artifactId&gt;any2json-pdf&lt;/artifactId&gt;
+    &lt;version&gt;${any2json.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h2 id="load-base-model">Load base model</h2>
+<p>To parse a document, any2Json needs a model that will contains the parameters required to the parsing. Instead to start
+from an empty Model (See <a href="../tutorial_8/">Tutorial 8</a>), we will start from an existing one and we will adapt it for our
+document. You can find a list and details of all models <a href="https://github.com/RomualdRousseau/Any2Json-Models/">here</a>.</p>
+<p>The base model, we will use, is "sales-english" that has been trained on 200+ english documents containing distributor
+data and with a large range of different layouts.</p>
+<p>The base model already recognize some entities such as DATE and NUMBER. We will configure a layex to extract the
+different elements of the documents. You can find more details about layex <a href="../white_papers/">here</a>.</p>
+<pre><code class="language-java">final var model = Common.loadModelFromGitHub(&quot;sales-english&quot;);
+
+// Add a layex to the model
+
+final var tableParser = new LayexTableParser(
+        List.of(&quot;(v.$)+&quot;),
+        List.of(&quot;(()(E+$E+$))(()(/^PRODUCTCODE/.+$)*(/PRODUCTCODE/.+$))+()&quot;));
+model.registerTableParser(tableParser);
+</code></pre>
+<h3 id="load-the-document">Load the document</h3>
+<p>We load the document by creating a document instance with the model. The hint "Document.Hint.INTELLI_LAYOUT" tells
+the document instance that the document has a complex layout. WThe recipe "sheet.setCapillarityThreshold(0)" tells the
+parser engine to extract the features as <strong><em>small</em></strong> as possible:</p>
+<pre><code class="language-java">final var file = Common.loadData(&quot;document with noises.pdf&quot;, this.getClass());
+try (final var doc = DocumentFactory.createInstance(file, &quot;UTF-8&quot;)
+        .setModel(model)
+        .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT))
+        .setRecipe(
+            &quot;sheet.setCapillarityThreshold(0)&quot;)) {
+    ...
+}
+</code></pre>
+<h3 id="output-the-tabular-result">Output the tabular result</h3>
+<p>Finally, we iterate over the sheets, rows and cells and output the data on the console:</p>
+<pre><code class="language-java">doc.sheets().forEach(s -&gt; Common.addSheetDebugger(s).getTable().ifPresent(t -&gt; {
+    Common.printHeaders(t.headers());
+    Common.printRows(t.rows());
+}));
+</code></pre>
+<pre><code class="language-bash"></code></pre>
+<p>On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
+between the elements of the spreadsheet and how there are structured in tabular form.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Congratulations! You have loaded documents using Any2Json.</p>
 <p>For more examples of using Any2Json, check out the <a href="../">tutorials</a>.</p></div>
