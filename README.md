@@ -1,6 +1,7 @@
 # Any2Json-Documents
 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+![Servier Inspired](https://raw.githubusercontent.com/RomualdRousseau/ServierHub/main/badges/inspired.svg)
 
 This repository contains the documentation how you can use the [Any2Json](https://github.com/RomualdRousseau/Any2Json)
 to load documents from "real life".
