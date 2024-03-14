@@ -20,7 +20,7 @@
 ## Plugins
 
 * [Any2Json Layex Parser](https://github.com/RomualdRousseau/Any2Json-Layex-Parser/)
-* [Any2Json Next Classifier](https://github.com/RomualdRousseau/Any2Json-Net-Classifier/)
+* [Any2Json Net Classifier](https://github.com/RomualdRousseau/Any2Json-Net-Classifier/)
 * [Any2Json Csv](https://github.com/RomualdRousseau/Any2Json-Csv/)
 * [Any2Json Excel](https://github.com/RomualdRousseau/Any2Json-Excel/)
 * [Any2Json Dbf](https://github.com/RomualdRousseau/Any2Json-Dbf/)
